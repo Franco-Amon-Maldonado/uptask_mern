@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const userSchema = mongoose.Schema(
 	{
@@ -30,6 +31,16 @@ const userSchema = mongoose.Schema(
 		timestamps: true,
 	}
 )
+
+userSchema.pre('save', async function(next){ //Codigo que se ejecutará antes de almacenar el registro en la base de datos
+	//Revisa que el password no haya sido cambiado
+	if(!this.isModified('password')){
+		next() //Avanza al siguiente middleware
+	}
+	const salt = await bcrypt.genSalt(10) //Rondas para hashear la password
+	this.password = await bcrypt.hash(this.password, salt) 
+
+})
 
 const User = mongoose.model('User', userSchema) //Creo el modelo user y le asocio su esquema 
 
