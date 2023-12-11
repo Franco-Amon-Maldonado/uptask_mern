@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import generateId from '../helpers/generateId.js'
 
 const register = async (req, res) => {
 	//Evitar registro duplicado
@@ -13,6 +14,7 @@ const register = async (req, res) => {
 
 	try {
 		const user = new User(req.body)
+        user.token = generateId()
 		const userSaved = await user.save() //Metodo de guardar de mongoose
 		res.json({
 			userSaved,
