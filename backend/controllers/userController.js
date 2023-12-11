@@ -24,4 +24,12 @@ const register = async (req, res) => {
 	}
 }
 
-export { register }
+
+const authenticator = async (req, res) => {
+
+    
+
+
+}
+
+export { register, authenticator }
