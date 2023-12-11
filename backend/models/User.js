@@ -31,6 +31,6 @@ const userSchema = mongoose.Schema(
 	}
 )
 
-const User = mongoose.model('User', userSchema) //C reo el modelo user y le asocio su esquema 
+const User = mongoose.model('User', userSchema) //Creo el modelo user y le asocio su esquema 
 
 export default User
